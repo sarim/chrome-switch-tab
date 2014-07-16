@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app>
+    <head>
+        <title>Quick Switch Tabs</title>
+        <style type="text/css" media="screen">
+        .tab-item:hover {
+            background-color: rgba(0,0,0,0.1);
+        }
+        .fav-img {
+            height: 32px;
+            width: 32px;
+        }
+        input.search {
+            width: 100%;
+        }
+        </style>
+    </head>
+    <body>
+        <h1>Tabs</h1>
+        <div ng-controller="TabCtrl" id="tab-ctrl">
+            <input type="search" ng-model="search" class="search" autofocus="autofocus">
+            <ul>
+                <li ng-repeat="tab in tabs | filter: {title:search}" ng-click="selectTab(tab.id)" class="tab-item">
+                    <img ng-src="{{tab.favIconUrl}}" class="fav-img">
+                    {{tab.title}}
+                </li>
+            </ul>
+        </div>
+        <script type="text/javascript" src="angular.min.js"></script>
+        <script type="text/javascript" src="tabs.js"></script>
+    </body>
+</html>

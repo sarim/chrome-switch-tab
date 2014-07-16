@@ -1,0 +1,23 @@
+{
+  "name": "Quick Switch Tab",
+  "version": "0.1",
+  "description": "Creates a keyboard shortcut (Ctrl + Shift + T) to bring up a quick tab switch popup",
+  "background": {
+    "persistent": false,
+    "scripts": ["background.js"]
+  },
+  "permissions": [
+    "tabs"
+  ],
+  "commands": {
+    "switch-tab": {
+      "suggested_key": {
+          "default": "Ctrl+Shift+T",
+          "mac": "MacCtrl+Shift+T"
+      },
+      "description": "Quick Tab Switch"
+    }
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "manifest_version": 2
+}
