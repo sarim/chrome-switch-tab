@@ -1,0 +1,24 @@
+{
+  "name": "chrome-switch-tab",
+  "version": "0.1",
+  "authors": [
+    "Sarim Khan <sarim2005@gmail.com>"
+  ],
+  "description": "Creates a keyboard shortcut (Ctrl + Shift + T) to bring up a quick tab switch popup",
+  "main": "tabs.js",
+  "keywords": [
+    "chrome-extension"
+  ],
+  "license": "MIT",
+  "homepage": "http://sarim.me",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "lib"
+  ],
+  "dependencies": {
+    "angular": "1.2.5",
+    "angular-moment": "~0.7.1"
+  }
+}
