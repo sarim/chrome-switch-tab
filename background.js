@@ -5,12 +5,14 @@ var views = chrome.extension.getViews({type: 'tab' /* 'windowId' : window.id*/ }
 
 var createTabList = function(tabObjs) {
     var tabs = [];
-    tabObjs.forEach(function(t){
+    tabObjs.forEach(function(t) {
+        if (!t.active)
         tabs.push({
             id: t.id,
             title: t.title,
             favIconUrl: t.favIconUrl,
-        })
+            lastActive: tabHistory.get(t.id)
+        });
     });
     pushTabsToPopup(tabs);
 }
@@ -34,8 +36,34 @@ var openTabListPopup = function() {
     });
 }
 
+chrome.tabs.onActivated.addListener(function(activeInfo) {
+    var tabSelected = tabHistory.getSelected();
+    if (tabSelected) {
+        tabHistory.set(tabSelected, new Date());
+    }
+    tabHistory.setSelected(activeInfo.tabId);
+});
+
 chrome.commands.onCommand.addListener(function(command) {
     if (command == "switch-tab") {
         openTabListPopup();
     }
 });
+
+var tabHistory = {
+    set: function(tid, time) {
+        localStorage[tid] = JSON.stringify(time);
+    },
+    get: function(tid) {
+        var time = localStorage[tid];
+        if (time) {
+            return new Date(JSON.parse(time));
+        }
+    },
+    setSelected: function(tid) {
+        localStorage.tabSelected = tid;
+    },
+    getSelected: function() {
+        return localStorage.tabSelected;
+    },
+};

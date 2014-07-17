@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="switchTab">
     <head>
         <title>Quick Switch Tabs</title>
         <style type="text/css" media="screen">
@@ -20,9 +20,10 @@
         <div ng-controller="TabCtrl" id="tab-ctrl">
             <input type="search" ng-model="search" class="search" autofocus="autofocus">
             <ul>
-                <li ng-repeat="tab in tabs | filter: {title:search}" ng-click="selectTab(tab.id)" class="tab-item">
+                <li ng-repeat="tab in tabs | orderBy:'lastActive':1 | filter: {title:search}" ng-click="selectTab(tab.id)" class="tab-item">
                     <img ng-src="{{tab.favIconUrl}}" class="fav-img">
                     {{tab.title}}
+                    <div am-time-ago="tab.lastActive"></div>
                 </li>
             </ul>
         </div>
