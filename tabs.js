@@ -48,6 +48,7 @@ window.addEventListener("blur", closeMe);
                 $scope.selectedTab = $scope.showTabs[index];
                 $event.preventDefault();
             } else if ($event.keyCode == 13) {
+                $event.preventDefault();
                 $scope.selectTab($scope.selectedTab);
             }
         }
@@ -63,5 +64,15 @@ window.addEventListener("blur", closeMe);
             
             closeMe();
         }        
-    }]);    
+    }]);
+    
+    
+    app.config( [
+        '$compileProvider',
+        function( $compileProvider ) {
+            var currentImgSrcSanitizationWhitelist = $compileProvider.imgSrcSanitizationWhitelist();
+            $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|chrome-extension):|data:image\//);
+        }
+    ]);
+    
 })();
