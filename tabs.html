@@ -2,30 +2,27 @@
 <html ng-app="switchTab">
     <head>
         <title>Quick Switch Tabs</title>
-        <style type="text/css" media="screen">
-        .tab-item:hover {
-            background-color: rgba(0,0,0,0.1);
-        }
-        .fav-img {
-            height: 32px;
-            width: 32px;
-        }
-        input.search {
-            width: 100%;
-        }
-        </style>
+        <link rel="stylesheet" href="lib/ionicons/css/ionicons.min.css" type="text/css">
+        <link rel="stylesheet" href="tabs.css" type="text/css">
     </head>
     <body>
-        <h1>Tabs</h1>
-        <div ng-controller="TabCtrl" id="tab-ctrl">
-            <input type="search" ng-model="search" class="search" autofocus="autofocus">
-            <ul>
-                <li ng-repeat="tab in tabs | orderBy:'lastActive':1 | filter: {title:search}" ng-click="selectTab(tab.id)" class="tab-item">
+        <div ng-controller="TabCtrl">
+            <div class="dark-search" id="tab-ctrl">
+                <span class="search-icon icon-left"><i class="ion-ios7-search-strong"></i></span>
+                <input type="text" ng-model="search" ng-keydown="onKeydown($event)" autofocus="autofocus">
+                <span class="search-icon icon-right" ng-click="searchClear()"><i class="ion-close-circled"></i></span>
+            </div>
+            <div>            
+                <div ng-repeat="tab in showTabs" ng-click="selectTab(tab)" class="dark-list" ng-class="{active: isSelected(tab)}">
                     <img ng-src="{{tab.favIconUrl}}" class="fav-img">
                     {{tab.title}}
-                    <div am-time-ago="tab.lastActive"></div>
-                </li>
-            </ul>
+                    <div class="bottom-line">
+                        <span class="window-id">{{tab.windowCount}}</span>
+                        <div class="tab-url">{{tab.url}}</div>
+                        <span class="last-time" am-time-ago="tab.lastActive"></span>
+                    </div>
+                </div>
+            </div>
         </div>
         <script type="text/javascript" src="lib/angular/angular.min.js"></script>
         <script type="text/javascript" src="lib/moment/min/moment.min.js"></script>

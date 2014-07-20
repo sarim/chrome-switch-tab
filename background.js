@@ -5,13 +5,27 @@ var views = chrome.extension.getViews({type: 'tab' /* 'windowId' : window.id*/ }
 
 var createTabList = function(tabObjs) {
     var tabs = [];
+    
+    var windowCounts = {};
+    var windowCount = 0;
+    
+    var getWindowCount = function(windowId) {
+        if (windowCounts[windowId] === undefined) {
+            windowCounts[windowId] = ++windowCount;
+        }
+        return windowCounts[windowId];        
+    }
+    
     tabObjs.forEach(function(t) {
         if (!t.active)
         tabs.push({
             id: t.id,
             title: t.title,
+            url: t.url,
             favIconUrl: t.favIconUrl,
-            lastActive: tabHistory.get(t.id)
+            lastActive: tabHistory.get(t.id),
+            windowId: t.windowId,
+            windowCount: getWindowCount(t.windowId)
         });
     });
     pushTabsToPopup(tabs);

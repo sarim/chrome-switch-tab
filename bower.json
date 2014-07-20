@@ -19,6 +19,7 @@
   ],
   "dependencies": {
     "angular": "1.2.5",
-    "angular-moment": "~0.7.1"
+    "angular-moment": "~0.7.1",
+    "ionicons": "~1.5.2"
   }
 }
