@@ -162,7 +162,9 @@ div.dark-search input:focus {
 }
 
 .window-id {
-    float: left;
+    position: absolute;
+    bottom: 2px;
+    left: 3px;
 }
 
 .last-time {
@@ -177,4 +179,9 @@ div.dark-search input:focus {
     white-space: nowrap;
     margin-left: 25px;
     float: left;
+}
+
+.tab-title {
+    height: 35px;
+    overflow: hidden;
 }

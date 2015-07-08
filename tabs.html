@@ -15,7 +15,7 @@
             <div>            
                 <div ng-repeat="tab in showTabs" ng-click="selectTab(tab)" class="dark-list" ng-class="{active: isSelected(tab)}">
                     <img ng-src="{{tab.favIconUrl || 'lib/ionicons/src/document.svg'}}" class="fav-img">
-                    {{tab.title}}
+                    <div class="tab-title">{{tab.title}}</div>
                     <div class="bottom-line">
                         <span class="window-id">{{tab.windowCount}}</span>
                         <div class="tab-url">{{tab.url}}</div>
